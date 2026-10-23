@@ -32,7 +32,6 @@ altura animada; bordas com feixe de luz girando. Tudo desliga com `prefers-reduc
 ## Decisões
 
 - O logo antigo (azul, "Soluções empresariais") que o site atual usa no Sobre **não** entrou: é a identidade abandonada.
-- O formulário de contato abre o WhatsApp já preenchido (sem servidor).
-- Formulários (inicial, Tecnologia e Contato) abrem o WhatsApp já preenchido.
+- Formulários (inicial, Tecnologia e Contato) abrem o WhatsApp já preenchido (sem servidor).
 - Capas do blog: as mesmas fotos do Unsplash do site atual, baixadas em WebP.
 - Números de painéis/guias nas ilustrações são fictícios.
