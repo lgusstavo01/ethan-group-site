@@ -1,7 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
 import { site } from '../config/site.js'
-import { goTo, onFrame } from '../lib/scroll.js'
+import { usePath } from '../lib/router.js'
+import { onFrame } from '../lib/scroll.js'
 import { Icon } from './Icon.jsx'
+import { Link } from './Link.jsx'
 import { Logo } from './Logo.jsx'
 
 /* ===== CABEÇALHO =====
@@ -11,6 +13,11 @@ import { Logo } from './Logo.jsx'
 export function Header() {
   const bar = useRef(null)
   const [open, setOpen] = useState(false)
+  const path = usePath()
+  const isActive = (href) => path === href || path.startsWith(`${href}/`)
+
+  // Trocou de página: fecha o menu do celular.
+  useEffect(() => setOpen(false), [path])
 
   useEffect(
     () =>
@@ -26,19 +33,22 @@ export function Header() {
         ref={bar}
         className="group mx-auto flex max-w-screen-xl items-center justify-between rounded-2xl border border-transparent px-4 py-3 transition-all duration-500 [&.is-scrolled]:border-white/10 [&.is-scrolled]:bg-ink/70 [&.is-scrolled]:shadow-2xl [&.is-scrolled]:shadow-black/40 [&.is-scrolled]:backdrop-blur-xl sm:px-5"
       >
-        <a href="#top" onClick={(e) => goTo(e, () => setOpen(false))} aria-label="Ethan Group — início" className="text-2xl">
+        <Link href="/" aria-label="Ethan Group — início" className="text-2xl">
           <Logo />
-        </a>
+        </Link>
 
         <nav aria-label="Principal" className="hidden items-center gap-1 lg:flex">
           {site.nav.map((item) => (
-            <a key={item.href} href={item.href} onClick={goTo} className="rounded-full px-4 py-2 text-sm font-medium text-soft transition hover:bg-white/5 hover:text-white">
+            <Link
+              key={item.href}
+              href={item.href}
+              aria-current={isActive(item.href) ? 'page' : undefined}
+              className="relative rounded-full px-3.5 py-2 text-sm font-medium text-soft transition hover:bg-white/5 hover:text-white aria-[current=page]:text-white xl:px-4"
+            >
               {item.label}
-            </a>
+              {isActive(item.href) && <span className="absolute inset-x-4 -bottom-0.5 h-px bg-gradient-to-r from-transparent via-cyan to-transparent" />}
+            </Link>
           ))}
-          <a href={site.pages.blog} className="rounded-full px-4 py-2 text-sm font-medium text-soft transition hover:bg-white/5 hover:text-white">
-            Blog
-          </a>
         </nav>
 
         <div className="flex items-center gap-2">
@@ -75,13 +85,17 @@ export function Header() {
       >
         <nav aria-label="Menu" className="flex flex-col p-3">
           {site.nav.map((item) => (
-            <a key={item.href} href={item.href} onClick={(e) => goTo(e, () => setOpen(false))} className="rounded-xl px-4 py-3.5 text-lg font-semibold text-white transition hover:bg-white/5">
+            <Link
+              key={item.href}
+              href={item.href}
+              onClick={() => setOpen(false)}
+              aria-current={isActive(item.href) ? 'page' : undefined}
+              className="flex items-center justify-between rounded-xl px-4 py-3.5 text-lg font-semibold text-white transition hover:bg-white/5 aria-[current=page]:bg-cyan/10 aria-[current=page]:text-cyan"
+            >
               {item.label}
-            </a>
+              <Icon name="arrow" className="size-4 opacity-40" />
+            </Link>
           ))}
-          <a href={site.pages.blog} className="rounded-xl px-4 py-3.5 text-lg font-semibold text-white transition hover:bg-white/5">
-            Blog
-          </a>
           <a href={site.clientArea} target="_blank" rel="noreferrer" className="mt-2 flex items-center justify-center gap-2 rounded-xl bg-cyan px-4 py-3.5 font-semibold text-ink">
             <Icon name="lock" className="size-4" />
             Área do Cliente

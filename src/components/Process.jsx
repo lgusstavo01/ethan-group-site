@@ -15,7 +15,8 @@ const STEPS = [
   { title: 'Escalabilidade', text: 'Relatórios mensais focados em redução de custos e lucro.' },
 ]
 
-export function Process() {
+/* Sem props, mostra o fluxo da página inicial; as páginas de serviço passam o seu. */
+export function Process({ steps = STEPS, eyebrow = 'Fluxo de trabalho', title = 'Sua empresa em', highlight = '4 etapas', after = ' simples.', text, id = 'como-funciona' }) {
   const reveal = useReveals()
   const track = useRef(null)
   const fill = useRef(null)
@@ -32,20 +33,22 @@ export function Process() {
         const p = clamp((vh * 0.75 - r.top) / (r.height + vh * 0.3))
         const vertical = window.innerWidth < 1024
         fill.current.style.transform = vertical ? `scaleY(${p})` : `scaleX(${p})`
-        dots.current.forEach((d, n) => d?.classList.toggle('is-on', p >= n / (STEPS.length - 1) - 0.02))
+        dots.current.forEach((d, n) => d?.classList.toggle('is-on', p >= n / (steps.length - 1) - 0.02))
       }),
-    [],
+    [steps.length],
   )
 
   return (
-    <section ref={reveal} id="como-funciona" className="relative scroll-mt-24 overflow-hidden px-4 py-24 sm:px-6 lg:py-32">
+    <section ref={reveal} id={id} className="relative scroll-mt-24 overflow-hidden px-4 py-24 sm:px-6 lg:py-32">
       <div aria-hidden="true" className="absolute left-1/2 top-0 -z-10 h-full w-[70rem] -translate-x-1/2 bg-[radial-gradient(ellipse_at_center,rgb(34_211_238/0.08),transparent_60%)]" />
       <div className="mx-auto max-w-screen-xl">
         <div className="mx-auto max-w-3xl text-center" data-reveal>
-          <Eyebrow>Fluxo de trabalho</Eyebrow>
+          <Eyebrow>{eyebrow}</Eyebrow>
           <h2 className="mt-6 text-display font-extrabold text-white">
-            Sua empresa em <span className="text-shine">4 etapas</span> simples.
+            {title} <span className="text-shine">{highlight}</span>
+            {after}
           </h2>
+          {text && <p className="mx-auto mt-6 max-w-2xl text-lead text-muted">{text}</p>}
         </div>
 
         <div ref={track} className="relative mt-20">
@@ -55,7 +58,7 @@ export function Process() {
           </div>
 
           <ol className="relative grid gap-12 lg:grid-cols-4 lg:gap-8">
-            {STEPS.map((s, n) => (
+            {steps.map((s, n) => (
               <li key={s.title} data-reveal style={{ '--d': `${n * 120}ms` }} className="relative pl-20 lg:pl-0 lg:pt-20">
                 <span
                   ref={(el) => (dots.current[n] = el)}

@@ -5,6 +5,7 @@ import { clamp } from '../lib/math.js'
 import { onFrame } from '../lib/scroll.js'
 import { Eyebrow } from './Eyebrow.jsx'
 import { Icon } from './Icon.jsx'
+import { Link } from './Link.jsx'
 
 /* ===== SERVIÇOS =====
    Cards empilhados: cada um gruda no topo (sticky) e, quando o próximo chega
@@ -131,14 +132,14 @@ export function Services() {
                       </li>
                     ))}
                   </ul>
-                  <a
+                  <Link
                     href={s.cta.href}
                     {...(s.cta.external ? { target: '_blank', rel: 'noreferrer' } : {})}
                     className="group mt-9 inline-flex items-center gap-2 rounded-full border border-white/15 px-6 py-3 font-semibold text-white transition-all duration-300 hover:border-cyan hover:bg-cyan hover:text-ink"
                   >
                     {s.cta.label}
                     <Icon name="arrowUp" className="size-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-                  </a>
+                  </Link>
                 </div>
                 <div className="relative hidden min-h-[26rem] overflow-hidden border-l border-white/5 bg-ink lg:block">
                   <div aria-hidden="true" className="grid-lines absolute inset-0" />

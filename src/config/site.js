@@ -13,21 +13,60 @@ export const site = {
   city: 'Salvador · BA',
   mapsUrl: 'https://www.google.com/maps/search/?api=1&query=Shopping+Paseo+Itaigara+Rua+Rubens+Guelli+135+Salvador',
   clientArea: 'https://vip.acessorias.com/ethansolucoes',
-  // Páginas internas que continuam no site atual.
+  // Mesmos caminhos do site atual (não quebra links do Google nem compartilhados).
   pages: {
     contabilidade: '/contabilidade',
     financeiro: '/financeiro',
     tecnologia: '/tecnologia',
     sobre: '/sobre',
     blog: '/blog',
+    contato: '/contato',
   },
   nav: [
-    { href: '#servicos', label: 'Serviços' },
-    { href: '#sobre', label: 'Sobre' },
-    { href: '#como-funciona', label: 'Como funciona' },
-    { href: '#duvidas', label: 'Dúvidas' },
-    { href: '#contato', label: 'Contato' },
+    { href: '/contabilidade', label: 'Contabilidade' },
+    { href: '/financeiro', label: 'BPO Financeiro' },
+    { href: '/tecnologia', label: 'Tecnologia' },
+    { href: '/sobre', label: 'Sobre' },
+    { href: '/blog', label: 'Blog' },
+    { href: '/contato', label: 'Contato' },
   ],
+}
+
+/* Título e descrição de cada página (SEO), copiados do site atual. */
+export const meta = {
+  '/': {
+    title: 'Ethan Group | Contabilidade e BPO Financeiro em Salvador - BA',
+    description:
+      'Escritório de contabilidade em Salvador com BPO Financeiro, planejamento tributário e tecnologia. Atendimento digital e consultivo. Agende um diagnóstico gratuito.',
+  },
+  '/contabilidade': {
+    title: 'Contabilidade em Salvador | Ethan Group',
+    description: 'Contabilidade consultiva em Salvador: planejamento tributário, departamento fiscal e pessoal, abertura de CNPJ e troca de contador sem burocracia.',
+  },
+  '/financeiro': {
+    title: 'BPO Financeiro em Salvador | Ethan Group',
+    description: 'Terceirize o financeiro da sua empresa: contas a pagar e receber, conciliação bancária, emissão de notas e relatórios com DRE e fluxo de caixa.',
+  },
+  '/tecnologia': {
+    title: 'Desenvolvimento de Sistemas e Sites | Ethan Group',
+    description: 'Sites, sistemas web, dashboards e automação de processos sob medida para empresas. Solicite um orçamento para o seu projeto.',
+  },
+  '/sobre': {
+    title: 'Sobre Nós | Ethan Group',
+    description: 'Conheça a Ethan Group: contabilidade, BPO Financeiro e tecnologia unidos para simplificar a gestão de empresas em Salvador e em todo o Brasil.',
+  },
+  '/blog': {
+    title: 'Blog de Contabilidade e Gestão | Ethan Group',
+    description: 'Artigos sobre contabilidade, impostos, planejamento tributário e gestão financeira para empresários que querem decidir com mais segurança.',
+  },
+  '/contato': {
+    title: 'Contato | Ethan Group - Contabilidade em Salvador',
+    description: 'Fale com a Ethan Group pelo WhatsApp, e-mail ou formulário. Escritório no Shopping Paseo Itaigara, Salvador - BA. Agende seu diagnóstico gratuito.',
+  },
+  notFound: {
+    title: 'Página não encontrada | Ethan Group',
+    description: 'A página que você procurou não existe ou foi movida.',
+  },
 }
 
 /** Link do WhatsApp; sem argumento usa a mensagem padrão. */

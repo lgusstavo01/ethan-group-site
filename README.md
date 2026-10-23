@@ -1,6 +1,6 @@
-# Ethan Group — site novo (página inicial)
+# Ethan Group — site novo
 
-Releitura moderna e animada da página inicial de https://www.ethangroup.com.br (out/2026),
+Releitura moderna e animada de https://www.ethangroup.com.br (out/2026) — todas as páginas,
 com o mesmo conteúdo e a identidade oficial da Ethan (guia 2026-10-05: slate `#020617`,
 ciano `#22D3EE`, Inter, logo em texto "ETHAN." com ponto ciano).
 
@@ -15,7 +15,10 @@ npm run build    # gera dist/
 ## Estrutura
 
 - `src/config/site.js` — **todos** os contatos, links e números (WhatsApp, e-mail, endereço, Área do Cliente, páginas internas, estatísticas).
-- `src/components/` — uma seção por arquivo; `App.jsx` só empilha.
+- `src/App.jsx` — tabela de rotas (mesmos caminhos do site atual: `/contabilidade`, `/financeiro`, `/tecnologia`, `/sobre`, `/blog`, `/blog/<id>`, `/contato`, 404) e troca de título/descrição por página.
+- `src/lib/router.js` + `src/components/Link.jsx` — roteador mínimo (history API, sem biblioteca). `vercel.json` manda toda rota para o `index.html`.
+- `src/pages/` — uma página por arquivo. `src/components/` — seções e blocos reaproveitáveis (`PageHero`, `SectionTitle`, `Faq`, `Process`, `ContactForm`, `CtaBanner`, `PostCard`).
+- `src/data/posts.js` — artigos do blog em blocos (p, h2, ul, quote, timeline, steps; `**negrito**`). Artigo novo = objeto novo aqui + capa em `public/capas/`.
 - `src/lib/scroll.js` — Lenis + um único loop de `requestAnimationFrame` (mesmo motor do projeto `txt`). As animações presas ao scroll escrevem direto no DOM, sem re-render.
 - `src/hooks/` — `useReveals` (entrada com blur/fade), `useSpotlight` (holofote que segue o mouse nos cards), `useReducedMotion`.
 
@@ -30,5 +33,6 @@ altura animada; bordas com feixe de luz girando. Tudo desliga com `prefers-reduc
 
 - O logo antigo (azul, "Soluções empresariais") que o site atual usa no Sobre **não** entrou: é a identidade abandonada.
 - O formulário de contato abre o WhatsApp já preenchido (sem servidor).
-- As páginas internas (`/contabilidade`, `/financeiro`, `/tecnologia`, `/sobre`, `/blog`) continuam as do site atual; aqui só a inicial.
+- Formulários (inicial, Tecnologia e Contato) abrem o WhatsApp já preenchido.
+- Capas do blog: as mesmas fotos do Unsplash do site atual, baixadas em WebP.
 - Números de painéis/guias nas ilustrações são fictícios.

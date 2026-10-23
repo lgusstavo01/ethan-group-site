@@ -5,6 +5,9 @@ import { easeOutCubic } from '../lib/math.js'
    Sobe de 0 até `value` na primeira vez que aparece na tela. Escreve direto
    no DOM (sem estado), então não re-renderiza a cada quadro. */
 
+/** 184250 → "184.250". */
+const fmt = (n) => n.toLocaleString('pt-BR')
+
 export function CountUp({ value, suffix = '', duration = 1800, className = '' }) {
   const ref = useRef(null)
 
@@ -12,7 +15,7 @@ export function CountUp({ value, suffix = '', duration = 1800, className = '' })
     const el = ref.current
     if (!el) return
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      el.textContent = `${value}${suffix}`
+      el.textContent = `${fmt(value)}${suffix}`
       return
     }
     let raf = 0
@@ -22,7 +25,7 @@ export function CountUp({ value, suffix = '', duration = 1800, className = '' })
       const start = performance.now()
       const tick = (now) => {
         const t = Math.min(1, (now - start) / duration)
-        el.textContent = `${Math.round(easeOutCubic(t) * value)}${suffix}`
+        el.textContent = `${fmt(Math.round(easeOutCubic(t) * value))}${suffix}`
         if (t < 1) raf = requestAnimationFrame(tick)
       }
       raf = requestAnimationFrame(tick)

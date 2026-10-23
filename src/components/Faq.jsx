@@ -5,7 +5,8 @@ import { Eyebrow } from './Eyebrow.jsx'
 import { Icon } from './Icon.jsx'
 
 /* ===== DÚVIDAS FREQUENTES =====
-   Acordeão com altura animada (grid-rows 0fr → 1fr), um aberto por vez. */
+   Acordeão com altura animada (grid-rows 0fr → 1fr), um aberto por vez.
+   Sem `items`, mostra as dúvidas gerais da página inicial. */
 
 const FAQ = [
   {
@@ -34,7 +35,7 @@ const FAQ = [
   },
 ]
 
-export function Faq() {
+export function Faq({ items = FAQ, eyebrow = 'Dúvidas frequentes', title = 'Ainda com', highlight = 'dúvidas?' }) {
   const reveal = useReveals()
   const [open, setOpen] = useState(0)
 
@@ -43,9 +44,9 @@ export function Faq() {
       <div className="mx-auto grid max-w-screen-xl gap-12 lg:grid-cols-12">
         <div className="lg:col-span-4" data-reveal>
           <div className="lg:sticky lg:top-32">
-            <Eyebrow>Dúvidas frequentes</Eyebrow>
+            <Eyebrow>{eyebrow}</Eyebrow>
             <h2 className="mt-6 text-display font-extrabold text-white">
-              Ainda com <span className="text-shine">dúvidas?</span>
+              {title} <span className="text-shine">{highlight}</span>
             </h2>
             <p className="mt-6 text-lead text-muted">Se a sua não estiver aqui, chama a gente. Respondemos rapidinho.</p>
             <a
@@ -61,7 +62,7 @@ export function Faq() {
         </div>
 
         <div className="space-y-3 lg:col-span-8">
-          {FAQ.map((item, n) => {
+          {items.map((item, n) => {
             const isOpen = open === n
             return (
               <div

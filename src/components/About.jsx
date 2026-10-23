@@ -4,6 +4,7 @@ import { useReveals } from '../hooks/useReveals.js'
 import { onFrame } from '../lib/scroll.js'
 import { Eyebrow } from './Eyebrow.jsx'
 import { Icon } from './Icon.jsx'
+import { Link } from './Link.jsx'
 
 /* ===== SOBRE =====
    Foto do site atual (reunião em luz ciano) com parallax: a imagem anda mais
@@ -80,10 +81,10 @@ export function About() {
             ))}
           </ul>
 
-          <a data-reveal href={site.pages.sobre} className="group mt-9 inline-flex items-center gap-2 font-semibold text-cyan">
+          <Link data-reveal href={site.pages.sobre} className="group mt-9 inline-flex items-center gap-2 font-semibold text-cyan">
             Conheça a nossa história
             <Icon name="arrow" className="size-4 transition-transform duration-300 group-hover:translate-x-1" />
-          </a>
+          </Link>
         </div>
       </div>
     </section>
